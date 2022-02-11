@@ -78,6 +78,7 @@ namespace ProjectSpace.Entities.Menu
 
                 if (Input.IsKeyPressed(Keys.Space))
                 {
+                    Camera.ShakeScreen(0.5f, 0.1);
                     switch (_menuOptions[_selectedItem])
                     {
                         case "PLAY":

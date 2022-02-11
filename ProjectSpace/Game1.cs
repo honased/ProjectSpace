@@ -119,10 +119,6 @@ namespace ProjectSpace
             // TODO: Add your drawing code here
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, Camera.GetMatrix(new Vector2(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight)));
             Scene.Draw(gameTime, _spriteBatch);
-
-            Vector2 size = AssetLibrary.GetAsset<SpriteFont>("fntText").MeasureString("Distant Horizons");
-
-            //_spriteBatch.DrawString(AssetLibrary.GetAsset<SpriteFont>("fntText"), "Distant Horizonts", Camera.CameraSize / new Vector2(2.0f, 2.5f), Color.PaleVioletRed, 0.0f, size / 2.0f, 3.0f, SpriteEffects.None, 0.0f);
             _spriteBatch.End();
 
             base.Draw(gameTime);

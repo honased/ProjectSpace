@@ -11,10 +11,16 @@ namespace ProjectSpace.Entities
 {
     public class AsteroidSpawner : Entity
     {
+        private const float TIMER_MAX = 1.0f;
+        private const float TIMER_MIN = 0.2f;
+
         private Coroutine _routine;
+        private float _timer;
 
         public AsteroidSpawner()
         {
+            _timer = TIMER_MAX;
+
             _routine = new Coroutine(this, Spawner());
             _routine.Start();
         }
@@ -52,7 +58,9 @@ namespace ProjectSpace.Entities
 
                 Scene.AddEntity(asteroid);
 
-                yield return 1.0f;
+                yield return _timer;
+
+                _timer = MathHelper.SmoothStep(_timer, TIMER_MIN, 0.05f);
             }
         }
 

@@ -15,7 +15,7 @@ namespace ProjectSpace.Entities
         private Transform2D _transform;
         private SpriteRenderer _renderer;
         private Collider2D _collider;
-        private bool _outOfBounds;
+        public bool FullDestroy { get; set; }
 
         public Vector2 Velocity { get; set; }
         public float RotationSpeed { get; set; }
@@ -27,7 +27,7 @@ namespace ProjectSpace.Entities
             _renderer = new SpriteRenderer(this) { Sprite = sprite, Animation = "default", Origin = new Vector2(size / 2.0f, size / 2.0f) };
             _collider = new Collider2D(this) { Shape = new BoundingRectangle(0, 0, size, size) { Origin = new Vector2(size / 2.0f, size / 2.0f) }, Tag = Constants.TAG_ASTEROID };
             SetRotationSpeed();
-            _outOfBounds = false;
+            FullDestroy = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -38,7 +38,6 @@ namespace ProjectSpace.Entities
 
             if(!Camera.Bounds.Contains(_transform.Position))
             {
-                _outOfBounds = true;
                 Destroy();
             }
 
@@ -47,7 +46,7 @@ namespace ProjectSpace.Entities
 
         protected override void Cleanup()
         {
-            if (_outOfBounds) return;
+            if (!FullDestroy) return;
 
             if(_renderer.Sprite == AssetLibrary.GetAsset<Sprite>("sprAsteroid"))
             {

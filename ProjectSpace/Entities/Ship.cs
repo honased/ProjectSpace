@@ -79,6 +79,7 @@ namespace ProjectSpace.Entities
             if(_collider.CollidesWith(Constants.TAG_ASTEROID, out Entity e))
             {
                 Destroy();
+                if (e is Asteroid roid) roid.FullDestroy = true;
                 e.Destroy();
                 Scene.GetEntity<AsteroidSpawner>()?.Destroy();
                 Scene.AddEntity(new Menu.MenuTransition());

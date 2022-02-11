@@ -35,6 +35,7 @@ namespace ProjectSpace.Entities
             if(_collider.CollidesWith(Constants.TAG_ASTEROID, out Entity asteroid))
             {
                 Destroy();
+                if (asteroid is Asteroid roid) roid.FullDestroy = true;
                 asteroid.Destroy();
 
                 Scene.GetEntity<ScoreCounter>()?.AddScore(100);

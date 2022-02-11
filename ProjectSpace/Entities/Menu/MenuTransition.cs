@@ -12,11 +12,13 @@ namespace ProjectSpace.Entities.Menu
     {
         private float _opacity;
         private Texture2D _tex;
+        private bool _screenCleared;
 
         public MenuTransition()
         {
             _opacity = 0.0f;
             _tex = null;
+            _screenCleared = false;
         }
 
         protected override void Cleanup()
@@ -28,11 +30,16 @@ namespace ProjectSpace.Entities.Menu
         {
             _opacity = MathHelper.SmoothStep(_opacity, 1.5f, 0.05f);
 
+            if(_opacity >= 1.0f && !_screenCleared)
+            {
+                _screenCleared = true;
+                Scene.Clear(this);
+            }
+
             if(_opacity >= 1.25f)
             {
-                var menu = new Menu();
-                Scene.Clear(menu);
-                Scene.AddEntity(menu);
+                Destroy();
+                Scene.AddEntity(new Menu());
             }
 
             base.Update(gameTime);
