@@ -73,8 +73,8 @@ namespace ProjectSpace.Entities.Menu
 
             if(_menuActive)
             {
-                if (Input.IsKeyPressed(Keys.A)) _selectedItem -= 1;
-                if (Input.IsKeyPressed(Keys.D)) _selectedItem += 1;
+                if (Input.IsKeyPressed(Keys.A) || Input.IsKeyPressed(Keys.Left)) _selectedItem -= 1;
+                if (Input.IsKeyPressed(Keys.D) || Input.IsKeyPressed(Keys.Right)) _selectedItem += 1;
 
                 if (Input.IsKeyPressed(Keys.Space))
                 {

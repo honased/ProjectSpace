@@ -11,7 +11,7 @@ namespace ProjectSpace.Entities
 {
     public class AsteroidSpawner : Entity
     {
-        private const float TIMER_MAX = 1.0f;
+        private const float TIMER_MAX = 2.0f;
         private const float TIMER_MIN = 0.2f;
 
         private Coroutine _routine;

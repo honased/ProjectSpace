@@ -37,13 +37,13 @@ namespace ProjectSpace.Entities
         {
             bool createTrail = false;
 
-            if (Input.IsKeyDown(Keys.D)) _direction += DIRECTION_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (Input.IsKeyDown(Keys.A)) _direction -= DIRECTION_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (Input.IsKeyDown(Keys.D) || Input.IsKeyDown(Keys.Right)) _direction += DIRECTION_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (Input.IsKeyDown(Keys.A) || Input.IsKeyDown(Keys.Left)) _direction -= DIRECTION_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (Input.IsKeyDown(Keys.D) || Input.IsKeyDown(Keys.A)) _renderer.Scale = new Vector2(1.0f, MathHelper.Lerp(_renderer.Scale.Y, 0.85f, 0.05f));
+            if (Input.IsKeyDown(Keys.D) || Input.IsKeyDown(Keys.A) || Input.IsKeyDown(Keys.Right) || Input.IsKeyDown(Keys.Left)) _renderer.Scale = new Vector2(1.0f, MathHelper.Lerp(_renderer.Scale.Y, 0.85f, 0.05f));
             else _renderer.Scale = new Vector2(1.0f, MathHelper.Lerp(_renderer.Scale.Y, 1.0f, 0.05f));
 
-            if (Input.IsKeyDown(Keys.W))
+            if (Input.IsKeyDown(Keys.W) || Input.IsKeyDown(Keys.Up))
             {
                 _velocity += new Vector2(MathF.Cos(_direction), MathF.Sin(_direction)) * MOVEMENT_SPEED;
                 createTrail = true;

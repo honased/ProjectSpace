@@ -1,0 +1,27 @@
+Content/Sprites/Asteroid Small.png - created by Eric Honas for this game, released under public domain
+
+Content/Sprites/Asteroid.png - created by Eric Honas for this game, released under public domain
+
+Content/Sprites/AsteroidFragment.png - created by Eric Honas for this game, released under public domain
+
+Content/Sprites/Keys.png - created by Eric Honas for this game, released under public domain
+
+Content/Sprites/Laser.png - created by Eric Honas for this game, released under public domain
+
+Content/Sprites/Ship.png - created by Eric Honas for this game, released under public domain
+
+Content/Sprites/ShipFragment.png - created by Eric Honas for this game, released under public domain
+
+Content/SFX/Death.wav - created by Eric Honas for this game, released under public domain
+
+Content/SFX/Destroy.wav - created by Eric Honas for this game, released under public domain
+
+Content/SFX/Explosion.wav - created by Eric Honas for this game, released under public domain
+
+Content/SFX/Highscore.wav - created by Eric Honas for this game, released under public domain
+
+Content/SFX/LaserShot.wav - created by Eric Honas for this game, released under public domain
+
+Content/SFX/MusicSpace.wav - created by Eric Honas for this game, released under public domain
+
+Content/PX Garamond/PX Garamond Regular.ttf - PX Garamond Regular font created by Tristan Dannenberg, released on Github (https://github.com/teryror/pixel-fonts) under the Open Font License
