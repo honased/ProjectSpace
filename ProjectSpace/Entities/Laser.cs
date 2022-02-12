@@ -32,7 +32,7 @@ namespace ProjectSpace.Entities
             _transform.Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
             _collider.Shape.Position = _transform.Position;
 
-            if(_collider.CollidesWith(Constants.TAG_ASTEROID, out Entity asteroid))
+            if(_collider.CollidesWith(Globals.TAG_ASTEROID, out Entity asteroid))
             {
                 Destroy();
                 if (asteroid is Asteroid roid) roid.FullDestroy = true;

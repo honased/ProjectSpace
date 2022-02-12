@@ -4,6 +4,7 @@ using HonasGame.ECS;
 using HonasGame.ECS.Components;
 using HonasGame.ECS.Components.Physics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,7 +26,7 @@ namespace ProjectSpace.Entities
             float size = sprite.Animations["default"].Frames[0].Width;
             _transform = new Transform2D(this);
             _renderer = new SpriteRenderer(this) { Sprite = sprite, Animation = "default", Origin = new Vector2(size / 2.0f, size / 2.0f) };
-            _collider = new Collider2D(this) { Shape = new BoundingRectangle(0, 0, size, size) { Origin = new Vector2(size / 2.0f, size / 2.0f) }, Tag = Constants.TAG_ASTEROID };
+            _collider = new Collider2D(this) { Shape = new BoundingRectangle(0, 0, size, size) { Origin = new Vector2(size / 2.0f, size / 2.0f) }, Tag = Globals.TAG_ASTEROID };
             SetRotationSpeed();
             FullDestroy = false;
         }
@@ -51,9 +52,9 @@ namespace ProjectSpace.Entities
             if(_renderer.Sprite == AssetLibrary.GetAsset<Sprite>("sprAsteroid"))
             {
                 // Generate asteroids
-                int numAsteroids = Constants.Random.Next(2, 5);
+                int numAsteroids = Globals.Random.Next(2, 5);
 
-                float rotation = (float)Constants.Random.NextDouble() * MathHelper.TwoPi;
+                float rotation = (float)Globals.Random.NextDouble() * MathHelper.TwoPi;
                 float increment = MathHelper.TwoPi / numAsteroids;
 
                 for (int i = 0; i < numAsteroids; i++)
@@ -61,8 +62,8 @@ namespace ProjectSpace.Entities
                     Asteroid asteroid = new Asteroid(AssetLibrary.GetAsset<Sprite>("sprAsteroidSmall"));
 
                     asteroid.Velocity = new Vector2(
-                        MathF.Cos(rotation) * Constants.Random.Next(10, 30),
-                        MathF.Sin(rotation) * Constants.Random.Next(10, 30)
+                        MathF.Cos(rotation) * Globals.Random.Next(10, 30),
+                        MathF.Sin(rotation) * Globals.Random.Next(10, 30)
                         );
 
                     asteroid.GetComponent<Transform2D>().Position = new Vector2(
@@ -90,11 +91,13 @@ namespace ProjectSpace.Entities
                     Scene.AddEntity(fragment);
                 }
             }
+
+            AssetLibrary.GetAsset<SoundEffect>("sndExplosion").Play();
         }
 
         private void SetRotationSpeed()
         {
-            RotationSpeed = (((float)Constants.Random.NextDouble()) * 2 - 1) * 3;
+            RotationSpeed = (((float)Globals.Random.NextDouble()) * 2 - 1) * 3;
         }
     }
 }

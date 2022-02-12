@@ -85,12 +85,12 @@ namespace ProjectSpace.Entities.Menu
         {
             while(true)
             {
-                var count = Constants.Random.Next(3);
+                var count = Globals.Random.Next(3);
 
                 for(int i = 0; i < count; i++)
                 {
                     Star star = new Star();
-                    star.position = new Vector2((float)Constants.Random.NextDouble() * Camera.CameraSize.X, (float)Constants.Random.NextDouble() * Camera.CameraSize.Y);
+                    star.position = new Vector2((float)Globals.Random.NextDouble() * Camera.CameraSize.X, (float)Globals.Random.NextDouble() * Camera.CameraSize.Y);
                     star.direction = star.position - new Vector2(Camera.CameraSize.X / 2.0f, Camera.CameraSize.Y / 2.0f);
                     star.direction.Normalize();
                     star.opacity = 0.0f;

@@ -4,6 +4,7 @@ using HonasGame.ECS;
 using HonasGame.ECS.Components;
 using HonasGame.ECS.Components.Physics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using System;
 
@@ -76,13 +77,15 @@ namespace ProjectSpace.Entities
 
             _collider.Shape.Position = _transform.Position;
 
-            if(_collider.CollidesWith(Constants.TAG_ASTEROID, out Entity e))
+            if(_collider.CollidesWith(Globals.TAG_ASTEROID, out Entity e))
             {
                 Destroy();
                 if (e is Asteroid roid) roid.FullDestroy = true;
                 e.Destroy();
                 Scene.GetEntity<AsteroidSpawner>()?.Destroy();
                 Scene.AddEntity(new Menu.MenuTransition());
+
+                AssetLibrary.GetAsset<SoundEffect>("sndDeath").Play();
             }
 
             // Create laser
@@ -99,6 +102,8 @@ namespace ProjectSpace.Entities
                 Scene.AddEntity(laser);
 
                 Camera.ShakeScreen(0.5f, 0.05);
+
+                AssetLibrary.GetAsset<SoundEffect>("sndLaserShot").Play();
             }
 
             // Create trail

@@ -1,6 +1,8 @@
 ﻿using HonasGame;
+using HonasGame.Assets;
 using HonasGame.ECS;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -34,9 +36,19 @@ namespace ProjectSpace.Entities.Menu
             {
                 _screenCleared = true;
                 Scene.Clear(this);
+
+                Entity e = Scene.GetEntity<ScoreCounter>();
+                if(e != null && e is ScoreCounter sc)
+                {
+                    if(sc.Score > Globals.HighScore)
+                    {
+                        Globals.HighScore = sc.Score;
+                        Scene.AddEntity(new FlashingMessage($"New Highscore: {Globals.HighScore}", AssetLibrary.GetAsset<SoundEffect>("sndHighscore")));
+                    }
+                }
             }
 
-            if(_opacity >= 1.25f)
+            if(_opacity >= 1.25f && Scene.GetEntity<FlashingMessage>() == null)
             {
                 Destroy();
                 Scene.AddEntity(new Menu());

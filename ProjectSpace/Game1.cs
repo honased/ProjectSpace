@@ -5,8 +5,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using ProjectSpace.Entities;
 using ProjectSpace.Entities.Menu;
+using System;
+using System.IO;
 
 namespace ProjectSpace
 {
@@ -21,6 +24,8 @@ namespace ProjectSpace
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
+            Window.Title = "Distant Horizons";
+
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
             _graphics.IsFullScreen = false;
@@ -34,7 +39,46 @@ namespace ProjectSpace
         {
             // TODO: Add your initialization logic here
 
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            path = Path.Combine(path, "580SpaceGame");
+            path = Path.Combine(path, "score.txt");
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    using (StreamReader sr = new StreamReader(path))
+                    {
+                        Globals.HighScore = Convert.ToInt32(sr.ReadLine());
+                    }
+                }
+            }
+            catch
+            {
+                Globals.HighScore = 0;
+            }
+
+            Exiting += Game1_Exiting;
+
             base.Initialize();
+        }
+
+        private void Game1_Exiting(object sender, EventArgs e)
+        {
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            path = Path.Combine(path, "580SpaceGame");
+
+            if(!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            path = Path.Combine(path, "score.txt");
+
+            using(StreamWriter sw = new StreamWriter(path))
+            {
+                sw.WriteLine(Globals.HighScore);
+            }
         }
 
         protected override void LoadContent()
@@ -92,10 +136,17 @@ namespace ProjectSpace
             AssetLibrary.AddAsset("sprKeys", spr);
 
             AssetLibrary.AddAsset("sndDestroy", Content.Load<SoundEffect>("SFX/Destroy"));
+            AssetLibrary.AddAsset("sndLaserShot", Content.Load<SoundEffect>("SFX/LaserShot"));
+            AssetLibrary.AddAsset("sndExplosion", Content.Load<SoundEffect>("SFX/Explosion"));
+            AssetLibrary.AddAsset("sndDeath", Content.Load<SoundEffect>("SFX/Death"));
+            AssetLibrary.AddAsset("sndHighscore", Content.Load<SoundEffect>("SFX/Highscore"));
+            AssetLibrary.AddAsset("musSpace", Content.Load<Song>("SFX/MusicSpace"));
 
             //Scene.AddEntity(new Ship());
             Scene.AddEntity(new Menu());
             //Scene.AddEntity(new ScoreCounter());
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(AssetLibrary.GetAsset<Song>("musSpace"));
         }
 
         protected override void Update(GameTime gameTime)

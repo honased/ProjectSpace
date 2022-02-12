@@ -20,11 +20,41 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/fntText.spritefont
 
+#begin SFX/Death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Death.wav
+
 #begin SFX/Destroy.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:SFX/Destroy.wav
+
+#begin SFX/Explosion.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Explosion.wav
+
+#begin SFX/Highscore.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Highscore.wav
+
+#begin SFX/LaserShot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/LaserShot.wav
+
+#begin SFX/MusicSpace.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SFX/MusicSpace.ogg
 
 #begin Sprites/Asteroid Small.png
 /importer:TextureImporter

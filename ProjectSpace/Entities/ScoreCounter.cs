@@ -11,7 +11,7 @@ namespace ProjectSpace.Entities
 {
     public class ScoreCounter : Entity
     {
-        private int _score;
+        public int Score { get; private set; }
         private float _scale;
         private float _rotation;
 
@@ -22,7 +22,7 @@ namespace ProjectSpace.Entities
 
         public ScoreCounter()
         {
-            _score = 0;
+            Score = 0;
             _font = AssetLibrary.GetAsset<SpriteFont>("fntText");
             _scale = BASE_SCALE;
             _rotation = 0.0f;
@@ -31,9 +31,9 @@ namespace ProjectSpace.Entities
 
         public void AddScore(int scoreAmount)
         {
-            _score += scoreAmount;
+            Score += scoreAmount;
             _scale = BASE_SCALE + 1.0f;
-            _rotation = (Constants.Random.Next(0, 10) < 5) ? 0.3f : -0.3f;
+            _rotation = (Globals.Random.Next(0, 10) < 5) ? 0.3f : -0.3f;
         }
 
         public override void Update(GameTime gameTime)
@@ -47,7 +47,7 @@ namespace ProjectSpace.Entities
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            string scoreStr = _score.ToString();
+            string scoreStr = Score.ToString();
             Vector2 origin = _font.MeasureString(scoreStr) / 2.0f;
             spriteBatch.DrawString(_font, scoreStr, new Vector2(Camera.CameraSize.X / 2.0f, 24), Color.FromNonPremultiplied(255, 255, 255, (int)(_opacity * 255)), _rotation, origin, _scale, SpriteEffects.None, 0.0f);
 

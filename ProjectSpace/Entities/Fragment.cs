@@ -24,11 +24,11 @@ namespace ProjectSpace.Entities
             _renderer = new SpriteRenderer(this) { Sprite = sprite, Animation = "default", FrameIndex = frame, Origin = new Vector2(sprite.Animations["default"].Frames[0].Width/2.0f, sprite.Animations["default"].Frames[0].Height / 2.0f) };
 
             _velocity = new Vector2(
-                Constants.Random.Next(-5, 5),
-                Constants.Random.Next(-5, 5)
+                Globals.Random.Next(-5, 5),
+                Globals.Random.Next(-5, 5)
                 );
 
-            _rotationSpeed = (float)(Constants.Random.NextDouble() * 2 - 1) * 0.2f;
+            _rotationSpeed = (float)(Globals.Random.NextDouble() * 2 - 1) * 0.2f;
 
             _lifeTime = LIFE_TIME;
         }

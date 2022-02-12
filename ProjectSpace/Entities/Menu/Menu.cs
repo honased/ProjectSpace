@@ -94,7 +94,7 @@ namespace ProjectSpace.Entities.Menu
 
                 _selectedItem = (_selectedItem + _menuOptions.Length) % _menuOptions.Length;
 
-                _opacity = MathHelper.Lerp(_opacity, 1.0f, 0.1f);
+                _opacity = MathHelper.Lerp(_opacity, 1.0f, 0.05f);
             }
             else
             {
@@ -127,7 +127,7 @@ namespace ProjectSpace.Entities.Menu
                     Scene.AddEntity(new Ship());
                     Scene.AddEntity(new ScoreCounter());
                     Scene.AddEntity(new AsteroidSpawner());
-                    AssetLibrary.GetAsset<SoundEffect>("sndDestroy").Play();
+                    Scene.AddEntity(new FlashingMessage("Destroy Asteroids", AssetLibrary.GetAsset<SoundEffect>("sndDestroy")));
                 }
             }
 
@@ -155,8 +155,14 @@ namespace ProjectSpace.Entities.Menu
             }
 
             // Draw Ship
-
             spriteBatch.Draw(_shipTex, _shipPos, null, (_menuActive) ? Color.FromNonPremultiplied(255, 255, 255, opacityToInt) : Color.White, _shipAngle, new Vector2(8, 8), Vector2.One, SpriteEffects.None, 0.0f);
+
+            // Draw HighScore
+            string highScore = $"Highscore: {Globals.HighScore}";
+            origin = _font.MeasureString(highScore);
+            origin.X /= 2.0f;
+
+            spriteBatch.DrawString(_font, highScore, new Vector2(Camera.CameraSize.X / 2.0f, Camera.CameraSize.Y - 8.0f), Color.FromNonPremultiplied(255, 255, 255, opacityToInt), 0.0f, origin, 1.0f, SpriteEffects.None, 0.0f);
 
             base.Draw(gameTime, spriteBatch);
         }
