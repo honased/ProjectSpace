@@ -143,6 +143,7 @@ namespace ProjectSpace
             AssetLibrary.AddAsset("musSpace", Content.Load<Song>("SFX/MusicSpace"));
 
             //Scene.AddEntity(new Ship());
+            Scene.AddLayer("default");
             Scene.AddEntity(new Menu());
             //Scene.AddEntity(new ScoreCounter());
             MediaPlayer.IsRepeating = true;
