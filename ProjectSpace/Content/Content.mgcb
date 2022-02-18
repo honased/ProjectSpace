@@ -92,6 +92,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/AsteroidFragment.png
 
+#begin Sprites/HangarShip.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/HangarShip.png
+
 #begin Sprites/Keys.png
 /importer:TextureImporter
 /processor:TextureProcessor

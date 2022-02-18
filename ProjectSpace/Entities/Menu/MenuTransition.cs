@@ -50,8 +50,7 @@ namespace ProjectSpace.Entities.Menu
 
             if(_opacity >= 1.25f && Scene.GetEntity<FlashingMessage>() == null)
             {
-                Destroy();
-                Scene.AddEntity(new Menu());
+                Rooms.Goto(Rooms.RoomMenu);
             }
 
             base.Update(gameTime);

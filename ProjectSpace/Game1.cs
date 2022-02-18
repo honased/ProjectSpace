@@ -95,9 +95,14 @@ namespace ProjectSpace
             AssetLibrary.AddAsset("asteroidFragment", Content.Load<Texture2D>("Sprites/AsteroidFragment"));
             AssetLibrary.AddAsset("laser", Content.Load<Texture2D>("Sprites/Laser"));
             AssetLibrary.AddAsset("keys", Content.Load<Texture2D>("Sprites/Keys"));
+            AssetLibrary.AddAsset("hangarShip", Content.Load<Texture2D>("Sprites/HangarShip"));
 
             Sprite spr = new Sprite(AssetLibrary.GetAsset<Texture2D>("ship"));
             AssetLibrary.AddAsset("sprShip", spr);
+
+            spr = new Sprite(AssetLibrary.GetAsset<Texture2D>("hangarShip"));
+            spr.Animations.Add("default", SpriteAnimation.FromSpritesheet(1, 0.0, 0, 0, 236, 123));
+            AssetLibrary.AddAsset("sprHangarShip", spr);
 
             spr = new Sprite(AssetLibrary.GetAsset<Texture2D>("laser"));
             AssetLibrary.AddAsset("sprLaser", spr);
@@ -144,10 +149,11 @@ namespace ProjectSpace
 
             //Scene.AddEntity(new Ship());
             Scene.AddLayer("default");
-            Scene.AddEntity(new Menu());
             //Scene.AddEntity(new ScoreCounter());
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(AssetLibrary.GetAsset<Song>("musSpace"));
+            //MediaPlayer.Play(AssetLibrary.GetAsset<Song>("musSpace"));
+
+            Rooms.Goto(Rooms.RoomHangar);
         }
 
         protected override void Update(GameTime gameTime)

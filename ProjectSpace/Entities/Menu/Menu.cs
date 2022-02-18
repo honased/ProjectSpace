@@ -124,10 +124,7 @@ namespace ProjectSpace.Entities.Menu
                     && Math.Abs(_shipAngle) < 0.01f)
                 {
                     _destroy = true;
-                    Scene.AddEntity(new Ship());
-                    Scene.AddEntity(new ScoreCounter());
-                    Scene.AddEntity(new AsteroidSpawner());
-                    Scene.AddEntity(new FlashingMessage("Destroy Asteroids", AssetLibrary.GetAsset<SoundEffect>("sndDestroy")));
+                    Rooms.Goto(Rooms.RoomBattlefield, this);
                 }
             }
 

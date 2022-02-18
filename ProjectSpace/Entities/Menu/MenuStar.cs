@@ -36,6 +36,7 @@ namespace ProjectSpace.Entities.Menu
 
             _routine = new Coroutine(this, CreateStars());
             _routine.Start();
+            Persistent = true;
         }
 
         protected override void Cleanup()
