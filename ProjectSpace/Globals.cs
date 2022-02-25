@@ -12,5 +12,6 @@ namespace ProjectSpace
 
         public const int TAG_NONE = 0;
         public const int TAG_ASTEROID = 1;
+        public const int TAG_PICKUP = 2;
     }
 }

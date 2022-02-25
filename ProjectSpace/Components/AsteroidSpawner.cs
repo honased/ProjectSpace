@@ -2,14 +2,15 @@
 using HonasGame.Assets;
 using HonasGame.ECS;
 using HonasGame.ECS.Components;
+using Microsoft.Xna.Framework;
+using ProjectSpace.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.Xna.Framework;
 
-namespace ProjectSpace.Entities
+namespace ProjectSpace.Components
 {
-    public class AsteroidSpawner : Entity
+    public class AsteroidSpawner : Component
     {
         private const float TIMER_MAX = 2.0f;
         private const float TIMER_MIN = 0.2f;
@@ -17,17 +18,17 @@ namespace ProjectSpace.Entities
         private Coroutine _routine;
         private float _timer;
 
-        public AsteroidSpawner()
+        public AsteroidSpawner(Entity parent) : base(parent)
         {
             _timer = TIMER_MAX;
 
-            _routine = new Coroutine(this, Spawner());
+            _routine = new Coroutine(parent, Spawner());
             _routine.Start();
         }
 
         private IEnumerator<double> Spawner()
         {
-            while(true)
+            while (true)
             {
                 var bounds = Camera.Bounds;
 
@@ -62,11 +63,6 @@ namespace ProjectSpace.Entities
 
                 _timer = MathHelper.SmoothStep(_timer, TIMER_MIN, 0.05f);
             }
-        }
-
-        protected override void Cleanup()
-        {
-            _routine.Enabled = false;
         }
     }
 }

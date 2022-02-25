@@ -35,7 +35,7 @@ namespace ProjectSpace.Entities
 
             _velocity = Vector2.Zero;
 
-            new BubbleShield(this);
+            //new BubbleShield(this);
         }
 
         public override void Update(GameTime gameTime)
@@ -87,10 +87,15 @@ namespace ProjectSpace.Entities
                 Destroy();
                 if (e is Asteroid roid) roid.FullDestroy = true;
                 e.Destroy();
-                Scene.GetEntity<AsteroidSpawner>()?.Destroy();
+                Scene.GetEntity<Spawner>()?.Destroy();
                 Scene.AddEntity(new Menu.MenuTransition());
 
                 AssetLibrary.GetAsset<SoundEffect>("sndDeath").Play();
+            }
+
+            if(_collider.CollidesWith(Globals.TAG_PICKUP, out e))
+            {
+                if (e is Pickup p) p.AddEffect(this);
             }
 
             // Create laser
