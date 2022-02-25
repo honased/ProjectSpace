@@ -153,7 +153,7 @@ namespace ProjectSpace
             MediaPlayer.IsRepeating = true;
             //MediaPlayer.Play(AssetLibrary.GetAsset<Song>("musSpace"));
 
-            Rooms.Goto(Rooms.RoomHangar);
+            Rooms.Goto(Rooms.RoomMenu);
         }
 
         protected override void Update(GameTime gameTime)

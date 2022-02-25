@@ -6,6 +6,7 @@ using HonasGame.ECS.Components.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
+using ProjectSpace.Components;
 using System;
 
 namespace ProjectSpace.Entities
@@ -23,6 +24,8 @@ namespace ProjectSpace.Entities
         private const float MOVEMENT_SPEED = 3.0f;
         private const float MAX_VELOCITY = 205.0f;
 
+        public bool Invincible { get; set; } = false;
+
         public Ship()
         {
             _transform = new Transform2D(this) { Position = Camera.CameraSize / 2.0f };
@@ -31,6 +34,8 @@ namespace ProjectSpace.Entities
             _collider = new Collider2D(this) { Shape = new BoundingRectangle(0, 0, 8, 8) { Origin = new Vector2(4, 2) } };
 
             _velocity = Vector2.Zero;
+
+            new BubbleShield(this);
         }
 
         public override void Update(GameTime gameTime)
@@ -77,7 +82,7 @@ namespace ProjectSpace.Entities
 
             _collider.Shape.Position = _transform.Position;
 
-            if(_collider.CollidesWith(Globals.TAG_ASTEROID, out Entity e))
+            if(!Invincible && _collider.CollidesWith(Globals.TAG_ASTEROID, out Entity e))
             {
                 Destroy();
                 if (e is Asteroid roid) roid.FullDestroy = true;
