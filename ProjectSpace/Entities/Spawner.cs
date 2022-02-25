@@ -15,6 +15,7 @@ namespace ProjectSpace.Entities
         public Spawner()
         {
             new AsteroidSpawner(this);
+            new PickupSpawner(this);
         }
 
         protected override void Cleanup()

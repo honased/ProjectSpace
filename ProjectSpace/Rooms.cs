@@ -32,7 +32,6 @@ namespace ProjectSpace
             Scene.AddEntity(new ScoreCounter());
             Scene.AddEntity(new Spawner());
             Scene.AddEntity(new FlashingMessage("Destroy Asteroids", AssetLibrary.GetAsset<SoundEffect>("sndDestroy")));
-            Scene.AddEntity(new PickupBubbleShield(new Vector2(60, 60)));
         }
 
         public static void RoomHangar()

@@ -12,10 +12,11 @@ namespace ProjectSpace.Components
     public class BubbleShield : Component
     {
         private const float RADIUS = 18.0f;
-        private const double MAX_LIFE = 5.0;
+        private const double MAX_LIFE = 8.0;
 
         private Collider2D _bubbleCollider;
         private double _life;
+        private float _increaseRadius;
 
         public BubbleShield(Entity parent) : base(parent)
         {
@@ -23,6 +24,7 @@ namespace ProjectSpace.Components
             if (parent is Ship ship) ship.Invincible = true;
 
             _life = MAX_LIFE;
+            _increaseRadius = 0.0f;
         }
 
         public override void Update(GameTime gameTime)
@@ -35,6 +37,7 @@ namespace ProjectSpace.Components
                 asteroid.Destroy();
 
                 Scene.GetEntity<ScoreCounter>()?.AddScore(100);
+                _increaseRadius = 6.0f;
             }
 
             _life -= gameTime.ElapsedGameTime.TotalSeconds;
@@ -46,18 +49,20 @@ namespace ProjectSpace.Components
                 Parent.RemoveComponent(this);
                 if (Parent is Ship ship) ship.Invincible = false;
             }
+
+            _increaseRadius = MathHelper.Lerp(_increaseRadius, 0.0f, 0.2f);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Color color;
             float t = (float)gameTime.TotalGameTime.TotalSeconds;
-            if (_life <= 1.0)
+            if (_life <= 2.0)
             {
                 color = Color.FromNonPremultiplied(0, 255, 255, (int)MathF.Round((MathF.Sin(t * 20.0f) + 1) / 2.0f) * 255);
             }
             else color = Color.Aqua;
-            spriteBatch.DrawCircle(Parent.GetComponent<Transform2D>().Position, RADIUS + MathF.Sin(t * 2.0f), color);
+            spriteBatch.DrawCircle(Parent.GetComponent<Transform2D>().Position, RADIUS + MathF.Sin(t * 2.0f) + _increaseRadius, color);
         }
     }
 }
