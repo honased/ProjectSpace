@@ -6,6 +6,7 @@ using HonasGame.ECS.Components.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using ProjectSpace.Components;
 using System;
 
@@ -67,17 +68,25 @@ namespace ProjectSpace.Entities
 
             _transform.Position += _velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            bool addVelocity = false;
             if(_transform.Position.X - 8 < 0 || _transform.Position.X + 8 > Camera.CameraSize.X)
             {
                 _transform.Position = new Vector2(MathHelper.Clamp(_transform.Position.X, 0, Camera.CameraSize.X), _transform.Position.Y);
                 _velocity.X *= -1;
                 Camera.ShakeScreen(1.0f, 0.1);
+                addVelocity = true;
             }
             if (_transform.Position.Y - 8 < 0 || _transform.Position.Y + 8 > Camera.CameraSize.Y)
             {
                 _transform.Position = new Vector2(_transform.Position.X, MathHelper.Clamp(_transform.Position.Y, 0, Camera.CameraSize.Y));
                 _velocity.Y *= -1;
                 Camera.ShakeScreen(1.0f, 0.1);
+                addVelocity = true;
+            }
+
+            if (addVelocity)
+            {
+                _transform.Position += _velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             _collider.Shape.Position = _transform.Position;
@@ -89,13 +98,18 @@ namespace ProjectSpace.Entities
                 e.Destroy();
                 Scene.GetEntity<Spawner>()?.Destroy();
                 Scene.AddEntity(new Menu.MenuTransition());
+                SongManager.FadeSong(2.0);
 
                 AssetLibrary.GetAsset<SoundEffect>("sndDeath").Play();
             }
 
             if(_collider.CollidesWith(Globals.TAG_PICKUP, out e))
             {
-                if (e is Pickup p) p.AddEffect(this);
+                if (e is Pickup p)
+                {
+                    p.AddEffect(this);
+                    AssetLibrary.GetAsset<SoundEffect>("sndPickup").Play();
+                }
             }
 
             // Create laser

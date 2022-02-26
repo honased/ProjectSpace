@@ -38,6 +38,12 @@
 /processorParam:Quality=Best
 /build:SFX/Explosion.wav
 
+#begin SFX/Hangar.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SFX/Hangar.wav;SFX/MusicHangar.wav
+
 #begin SFX/Highscore.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -55,6 +61,30 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:SFX/MusicSpace.ogg
+
+#begin SFX/Powerup.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Powerup.wav
+
+#begin SFX/Voices/Alien1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Voices/Alien1.wav
+
+#begin SFX/Voices/Alien2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Voices/Alien2.wav
+
+#begin SFX/Voices/Alien3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Voices/Alien3.wav
 
 #begin Sprites/Asteroid Small.png
 /importer:TextureImporter

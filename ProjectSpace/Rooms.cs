@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using ProjectSpace.Entities;
 using ProjectSpace.Entities.Hangar;
+using ProjectSpace.Entities.MadeBy;
 using ProjectSpace.Entities.Menu;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,11 @@ namespace ProjectSpace
         {
             Scene.Clear(exclude);
             generator();
+        }
+
+        public static void RoomMadeBy()
+        {
+            Scene.AddEntity(new MadeBy());
         }
 
         public static void RoomMenu()

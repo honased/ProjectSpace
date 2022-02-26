@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,6 +32,7 @@ namespace ProjectSpace.Entities.Menu
 
         public Menu()
         {
+            SongManager.PlaySong(AssetLibrary.GetAsset<Song>("musHangar"));
             _position = new Vector2(Camera.CameraSize.X / 2.0f, Camera.CameraSize.Y - 64);
             new Transform2D(this) { Position = _position };
             new SpriteRenderer(this) { Sprite = AssetLibrary.GetAsset<Sprite>("sprKeys"), Origin = new Vector2(100, 25), Scale = new Vector2(1.0f), Animation = "default" };
@@ -84,6 +86,7 @@ namespace ProjectSpace.Entities.Menu
                         case "PLAY":
                             _menuActive = false;
                             _star.KillMe();
+                            SongManager.TransitionSong(AssetLibrary.GetAsset<Song>("musSpace"), 0.5, true);
                             break;
 
                         case "QUIT":
@@ -94,7 +97,7 @@ namespace ProjectSpace.Entities.Menu
 
                 _selectedItem = (_selectedItem + _menuOptions.Length) % _menuOptions.Length;
 
-                _opacity = MathHelper.Lerp(_opacity, 1.0f, 0.05f);
+                _opacity = MathHelper.Lerp(_opacity, 1.0f, 0.03f);
             }
             else
             {

@@ -26,7 +26,7 @@ namespace ProjectSpace.Entities
             float size = sprite.Animations["default"].Frames[0].Width;
             _transform = new Transform2D(this);
             _renderer = new SpriteRenderer(this) { Sprite = sprite, Animation = "default", Origin = new Vector2(size / 2.0f, size / 2.0f) };
-            _collider = new Collider2D(this) { Shape = new BoundingCircle(0, 0, size / 2.5f), Tag = Globals.TAG_ASTEROID };
+            _collider = new Collider2D(this) { Shape = new BoundingCircle(0, 0, size / 2f), Tag = Globals.TAG_ASTEROID };
             SetRotationSpeed();
             FullDestroy = false;
         }

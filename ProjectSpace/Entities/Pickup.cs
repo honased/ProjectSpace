@@ -23,7 +23,7 @@ namespace ProjectSpace.Entities
 
     public class PickupBubbleShield : Pickup
     {
-        private const float RADIUS = 4.0f;
+        private const float RADIUS = 6.0f;
         private float _alpha;
         public PickupBubbleShield(Vector2 position)
         {

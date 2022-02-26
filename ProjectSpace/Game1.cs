@@ -145,15 +145,15 @@ namespace ProjectSpace
             AssetLibrary.AddAsset("sndExplosion", Content.Load<SoundEffect>("SFX/Explosion"));
             AssetLibrary.AddAsset("sndDeath", Content.Load<SoundEffect>("SFX/Death"));
             AssetLibrary.AddAsset("sndHighscore", Content.Load<SoundEffect>("SFX/Highscore"));
+            AssetLibrary.AddAsset("sndPickup", Content.Load<SoundEffect>("SFX/Powerup"));
+            AssetLibrary.AddAsset("sndAlien1", Content.Load<SoundEffect>("SFX/Voices/Alien1"));
+            AssetLibrary.AddAsset("sndAlien2", Content.Load<SoundEffect>("SFX/Voices/Alien2"));
             AssetLibrary.AddAsset("musSpace", Content.Load<Song>("SFX/MusicSpace"));
+            AssetLibrary.AddAsset("musHangar", Content.Load<Song>("SFX/MusicHangar"));
 
-            //Scene.AddEntity(new Ship());
             Scene.AddLayer("default");
-            //Scene.AddEntity(new ScoreCounter());
-            MediaPlayer.IsRepeating = true;
-            //MediaPlayer.Play(AssetLibrary.GetAsset<Song>("musSpace"));
 
-            Rooms.Goto(Rooms.RoomMenu);
+            Rooms.Goto(Rooms.RoomMadeBy);
         }
 
         protected override void Update(GameTime gameTime)
@@ -165,6 +165,7 @@ namespace ProjectSpace
 
             // TODO: Add your update logic here
             Input.Update();
+            SongManager.Update(gameTime);
             Scene.Update(gameTime);
 
             base.Update(gameTime);
